@@ -1,33 +1,40 @@
-
 class Towel:
     def __init__(self, color: str, size: str):
         self.color: str = color
         self.size: str = size
         self.wetness: int = 0
-    
-    
+
     def isMaxWetness(self) -> int:
-        if self.size == "P": 
+        if self.size == "P":
             return 10
         if self.size == "M":
             return 20
         if self.size == "G":
             return 30
-        return 0 
- 
+        return 0
+
+    def isDry(self) -> bool:
+        return self.wetness == 0
+
+    def wrig(self):
+        if self.wetness == 0:
+            print("fail: toalha seca")
+        else:
+            self.wetness -= 5
+            if self.wetness < 0:
+                self.wetness = 0
+
     def dry(self, amount: int):
         self.wetness += amount
         if self.wetness >= self.isMaxWetness():
             print("toalha encharcada")
-            self.wetness = self.isMaxWetness()   
-        
-   
+            self.wetness = self.isMaxWetness()
 
-    def __str__(self) -> str: 
+    def __str__(self) -> str:
         return f"Cor: {self.color}, Tamanho: {self.size}, Umidade: {self.wetness}"
 
 def main():
-    towel: Towel = Towel("","")
+    towel: Towel = Towel("", "")
     while True:
         line: str = input()
         print("$" + line)
@@ -37,17 +44,19 @@ def main():
             break
         elif args[0] == "criar":
             Cor: str = args[1]
-            Tamanho: str =  args[2]
-            towel = Towel(Cor, Tamanho )
+            Tamanho: str = args[2]
+            towel = Towel(Cor, Tamanho)
         elif args[0] == "seca":
-            print("sim" if towel.isDry() else "nao" )
+            print("sim" if towel.isDry() else "nao")
         elif args[0] == "torcer":
-            towel.wrig
+            towel.wrig()
         elif args[0] == "dry":
             amount: int = int(args[1])
             towel.dry(amount)
-        elif args [0] == "mostrar":
+        elif args[0] == "mostrar":
             print(towel)
         else:
             print("fail: comando não encontrado")
-main()
+
+if __name__ == "__main__":
+    main()
