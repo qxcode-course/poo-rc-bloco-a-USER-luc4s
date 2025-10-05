@@ -26,7 +26,7 @@ class Car:
 
     def fuel(self, amount):
         self.gas += amount
-        if self.gas > self.gasMAx:
+        if self.gas > self.gasMax:
             self.gas = self.gasMax
 
     def drive(self, distance):
